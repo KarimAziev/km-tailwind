@@ -1,0 +1,60 @@
+#+OPTIONS: ^:nil tags:nil num:nil
+
+* About
+
+Hardcoded completions for Tailwind CSS 4.
+
+*Why?*
+
+Because the Tailwind CSS LSP server is slow, and I prefer to invoke these completions manually. The drawback is that any customized variables will not be reflected in the annotations.
+
+* Table of Contents                                       :TOC_2_gh:QUOTE:
+#+BEGIN_QUOTE
+- [[#about][About]]
+- [[#requirements][Requirements]]
+- [[#installation][Installation]]
+  - [[#with-use-package-and-straightel][With use-package and straight.el]]
+  - [[#manual-installation][Manual installation]]
+- [[#usage][Usage]]
+#+END_QUOTE
+
+* Requirements
+
+| Name  | Version |
+|-------+---------|
+| Emacs |    28.1 |
+
+
+* Installation
+
+** With use-package and straight.el
+#+begin_src elisp :eval no
+(use-package km-tailwind
+  :straight (km-tailwind
+             :repo "KarimAziev/km-tailwind"
+             :type git
+             :host github
+             :flavor nil)
+  :bind ((:map km-tailwind-minibuffer-map
+          ("C-j" . km-tailwind-minibuffer-preview)))
+  :commands (km-tailwind-complete))
+#+end_src
+
+** Manual installation
+
+Download the source code and put it wherever you like, e.g. into =~/.emacs.d/km-tailwind/=
+
+#+begin_src shell :eval no
+git clone https://github.com/KarimAziev/km-tailwind.git ~/.emacs.d/km-tailwind/
+#+end_src
+
+Add the downloaded directory to the load path:
+
+#+begin_src elisp :eval no
+(add-to-list 'load-path "~/.emacs.d/km-tailwind/")
+(require 'km-tailwind)
+#+end_src
+
+* Usage
+
+  Just run ~M-x km-tailwind-complete RET~.
